@@ -1,0 +1,45 @@
+Gates
+Produced by Cubeneo, in Pascal.
+All Rights Reserved.
+
+每个元件都有两个输入，分别为A（0）、B（1）。
+注：非门也有两个输入。虽然并没有什么作用，但Gates允许对非门的B端执行linkto操作。实际上，真正起作用的是非门的A端。
+
+除输出元件没有输出端外，每个元件都只有一个输出端。但是这一个输出端可以有11个分支，分别连接11个输入端。
+注：Gates不禁止将元件输出作为自身输入的操作，因为这在实际电路连接中是可能的。
+
+exit命令可以以空格或回车结束，Gates可以正常读取。有参数的命令不能有多余的空格。参数读入尚待优化，如果要求数字时输入了字符类，Gates将会闪退。
+Gates所有的命令对大小写不敏感。Gates不支持命令缩写。
+
+Gates的门类型代码如下：
+        input_Gate = 0 ;  output_Gate = 1 ;
+	  not_Gate = 2 ;      or_Gate = 3 ;
+	  and_Gate = 4 ;
+现在暂时不支持用英文字符指代门类型。
+
+
+list                     列出所有元件
+list {type_num}          列出指定类型元件
+exit                     退出
+new {type_num}           新建指定类型元件
+del {id}                 删除指定类型元件
+linkto {id, AorB, from}  将from的输出连接到id元件的AorB输入端
+cut {id, AorB}           剪断id元件的AorB输入端，使空置
+click {id_of_inputGate]  按下inputGate的开关
+
+示例-异或门的构建
+new 0
+new 0
+new 3
+new 2
+new 4
+new 4
+new 1
+linkto 7 0 6
+linkto 6 0 3
+linkto 6 1 4
+linkto 4 0 5
+linkto 3 0 1
+linkto 3 1 2
+linkto 5 0 1
+linkto 5 1 2
